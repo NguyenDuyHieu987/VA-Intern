@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>JavaScript Arrays</h1>
+    <h2>The entries() method</h2>
+
+    <h1 id="demo"></h1>
+    <input class="input-car" type="text" />
+    <button class="add-car">Add</button>
+    <script>
+      /*  function mainCounter() {
+        let counter = 0;
+        function increase() {
+          return ++counter;
+        }
+        return increase;
+      }
+
+      const counter1 = mainCounter();
+
+      console.log(counter1());
+      console.log(counter1());
+      console.log(counter1()); */
+
+      /*  function createLogger(namespace) {
+        function logger(message) {
+          console.log(`[${namespace}] ${message}`);
+        }
+        return logger;
+      }
+
+      const infoLogger = createLogger('Info');
+      infoLogger('Bắt đầu gửi email');
+      infoLogger('Gửi email lỗi lần 1, thử gửi lại...');
+      infoLogger('Gửi email thành công cho user xxx');
+
+      const errorLogger = createLogger('Error');
+      errorLogger('Email không tồn tại trong DB');
+      errorLogger('Gửi email lỗi lần 1, thử gửi lại...');
+      errorLogger('Gửi email thành công cho user xxx'); */
+
+      /*function createStorage(key) {
+        const store = JSON.parse(localStorage.getItem(key)) ?? {};
+
+        const save = () => {
+          localStorage.setItem(key, JSON.stringify(store));
+        };
+
+        const storage = {
+          get(key) {
+            return store[key];
+          },
+          set(key, value) {
+            store[key] = value;
+            save();
+          },
+          remove(key) {
+            delete store[key];
+            save();
+          },
+        };
+
+        return storage;
+      }
+
+      const ProfileSetting = createStorage('profile_setting');
+      ProfileSetting.set('fullName', 'duy hieu');
+      ProfileSetting.set('age', 20);
+      ProfileSetting.set('address', 'Hà Nội');
+      store = 'hieu';*/
+
+      const $ = document.querySelector.bind(document);
+      const $$ = document.querySelectorAll.bind(document);
+
+      const app = (() => {
+        const cars = [];
+
+        const root = $('#demo');
+        const input = $('.input-car');
+        const add = $('.add-car');
+
+        return {
+          add(car) {
+            cars.push(car);
+          },
+          render() {
+            //console.log(cars);
+            const html = cars
+              .map(
+                (car, index) => `<li>
+              ${car}
+              <span class="delete" data-index="${index}">&times</span>
+            </li>`
+              )
+              .join('');
+
+            root.innerHTML = html;
+          },
+          delete(index) {
+            cars.splice(index, 1);
+          },
+          init() {
+            add.onclick = () => {
+              console.log(this);
+              const car = input.value;
+              this.add(car);
+              this.render();
+
+              input.value = null;
+              input.focus;
+            };
+
+            root.onclick = (e) => {
+              const deleteBtn = e.target.closest('.delete');
+              if (deleteBtn) {
+                const index = deleteBtn.dataset.index;
+                this.delete(index);
+                this.render();
+              }
+            };
+
+            this.render();
+          },
+        };
+      })();
+
+      app.init();
+    </script>
+  </body>
+</html>

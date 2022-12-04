@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>JavaScript Arrays</h1>
+    <h2>The entries() method</h2>
+
+    <p id="demo"></p>
+    <input class="input-car" type="text" />
+    <button class="add-car">Add</button>
+    <button class="delete-car">Delete</button>
+    <script>
+      /*  function mainCounter() {
+        let counter = 0;
+        function increase() {
+          return ++counter;
+        }
+        return increase;
+      }
+
+      const counter1 = mainCounter();
+
+      console.log(counter1());
+      console.log(counter1());
+      console.log(counter1()); */
+
+      /*  function createLogger(namespace) {
+        function logger(message) {
+          console.log(`[${namespace}] ${message}`);
+        }
+        return logger;
+      }
+
+      const infoLogger = createLogger('Info');
+      infoLogger('Bắt đầu gửi email');
+      infoLogger('Gửi email lỗi lần 1, thử gửi lại...');
+      infoLogger('Gửi email thành công cho user xxx');
+
+      const errorLogger = createLogger('Error');
+      errorLogger('Email không tồn tại trong DB');
+      errorLogger('Gửi email lỗi lần 1, thử gửi lại...');
+      errorLogger('Gửi email thành công cho user xxx'); */
+
+      /*function createStorage(key) {
+        const store = JSON.parse(localStorage.getItem(key)) ?? {};
+
+        const save = () => {
+          localStorage.setItem(key, JSON.stringify(store));
+        };
+
+        const storage = {
+          get(key) {
+            return store[key];
+          },
+          set(key, value) {
+            store[key] = value;
+            save();
+          },
+          remove(key) {
+            delete store[key];
+            save();
+          },
+        };
+
+        return storage;
+      }
+
+      const ProfileSetting = createStorage('profile_setting');
+      ProfileSetting.set('fullName', 'duy hieu');
+      ProfileSetting.set('age', 20);
+      ProfileSetting.set('address', 'Hà Nội');
+      store = 'hieu';*/
+
+      function createApp() {
+        const cars = [];
+        return {
+          add(car) {
+            cars.push(car);
+          },
+          show() {
+            //console.log(cars);
+            return cars;
+          },
+          delete(car) {
+            delete cars[car];
+          },
+        };
+      }
+
+      const app = createApp();
+
+      document.getElementById('demo').innerHTML = app.show();
+      const btnAddCar = document.querySelector('.add-car');
+      btnAddCar.addEventListener('click', () => {
+        const inputCar = document.querySelector('.input-car').value;
+        app.add(inputCar);
+        document.getElementById('demo').innerHTML = app.show().join(', ');
+      });
+
+      const btndelCar = document.querySelector('.delete-car');
+      btndelCar.addEventListener('click', () => {
+        const inputCar = document.querySelector('.input-car').value;
+        app.delete(inputCar);
+
+        document.getElementById('demo').innerHTML = app.show().join(', ');
+      });
+    </script>
+  </body>
+</html>

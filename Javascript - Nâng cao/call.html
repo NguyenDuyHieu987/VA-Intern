@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>JavaScript Arrays</h1>
+    <h2>The entries() method</h2>
+
+    <h1 id="demo"></h1>
+    <input class="input-car" type="text" />
+    <button class="add-car">Add</button>
+    <script>
+      function Animal(name, weight) {
+        this.name = name;
+        this.weight = weight;
+      }
+
+      function Chicken(name, weight, legs) {
+        Animal.call(this, name, weight);
+        this.legs = legs;
+      }
+
+      const hieu = new Chicken('Hieu', 66, 2);
+
+      function x() {
+        console.log(Array.from('adfgh'));
+      }
+      x(1, 2, 3);
+    </script>
+  </body>
+</html>
